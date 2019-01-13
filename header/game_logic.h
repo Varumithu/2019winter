@@ -9,7 +9,7 @@ class board final {
 Tile has a 2d array (2*2) of booleans which says which exits are connected to which
 Tile also has a pointer to character, NULL if empty
 
-Character knows its name (i don't see the point of inheritance here)
+I actually see the point of inheritance, every character is a derived class with draw method overload
 
 board has a 2d array of pointers to tiles
 
