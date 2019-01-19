@@ -1,7 +1,11 @@
 #ifndef GAME_LOGIC_DOTH_
 #define GAME_LOGIC_DOTH_
 
+#include <vector>
+
 class board final {
+	size_t width, height;
+	std::vector <std::vector<tile>> tiles;
 
 };
 
@@ -19,10 +23,15 @@ std::vector<std::set<std::string>>
 */
 class tile final {
     tile();
+	void draw();
+
+	bool pathways[16]; // from north clockwise 0 1 2 3
+
 };
 
-class character final {
-
+class character{
+	virtual ~character();
+	virtual void draw();
 };
 
 class game_logic final {
@@ -30,6 +39,7 @@ public:
     game_logic();
     void place_character();
     board board;
+	void check_connections();
 };
 
 
