@@ -3,11 +3,6 @@
 
 #include <vector>
 
-class board final {
-	size_t width, height;
-	std::vector <std::vector<tile>> tiles;
-
-};
 
 /*
 Tile has a 2d array (2*2) of booleans which says which exits are connected to which
@@ -28,6 +23,13 @@ class tile final {
 	bool pathways[16]; // from north clockwise 0 1 2 3
 
 };
+
+class board final {
+    size_t width, height;
+    std::vector <std::vector<tile>> tiles;
+
+};
+
 
 class character{
 	virtual ~character();
