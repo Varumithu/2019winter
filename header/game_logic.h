@@ -17,6 +17,7 @@ board positions and character names;
 std::vector<std::set<std::string>>
 */
 class tile final {
+public:
     tile();
 	void draw();
 
@@ -24,23 +25,27 @@ class tile final {
 
 };
 
-class board final {
-    size_t width, height;
-    std::vector <std::vector<tile>> tiles;
-
-};
 
 
 class character{
 	virtual ~character();
 	virtual void draw();
+    size_t x_pos, y_pos;
 };
+
+class board final {
+public:
+    size_t width, height;
+    std::vector <std::vector<tile>> tiles;
+    std::vector<std::pair<character, size_t>> chars;
+};
+
 
 class game_logic final {
 public:
     game_logic();
     void place_character();
-    board board;
+    board this_board;
 	void check_connections();
 };
 
