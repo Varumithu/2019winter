@@ -1,5 +1,7 @@
 #include "game_logic.h"
 
+#include <vector>
+#include <set>
 
 /*
 for every character finds all characters it connects to
@@ -23,7 +25,8 @@ void game_logic::labyrinth_step(size_t x_pos, size_t y_pos, size_t where_from) {
     }
 }
 
-void game_logic::check_connections() { 
+void game_logic::check_connections( ) {
+    std::vector<std::set<character*>> connected_chars;
     for (auto it = this->this_board.chars.begin(); it != this_board.chars.end(); ++it){
 
     }
