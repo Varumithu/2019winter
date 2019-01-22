@@ -18,7 +18,7 @@ board positions and character names;
 std::vector<std::set<std::string>>
 */
 
-
+enum Side { North = 0, East = 1, South = 2, West = 3 };
 
 
 class character{
@@ -26,7 +26,7 @@ public:
 	virtual ~character();
 	virtual void draw();
     size_t x_pos, y_pos;
-    size_t side; // on which side of tile the character lives, 0 is up, 1 is right, 2 is down, 3 is left
+    Side side; // on which side of tile the character lives
 };
 
 class tile final {
@@ -38,22 +38,28 @@ public:
     character* inhabitant = nullptr;
 };
 
-class board final {
-public:
-    size_t width, height;
-    std::vector <std::vector<tile>> tiles;
-    std::vector<std::pair<character, std::pair<size_t, size_t>>> chars;
-};
+//class board final {
+//public:
+//    size_t width, height;
+//    std::vector <std::vector<tile>> tiles;
+//    std::vector<std::pair<character, std::pair<size_t, size_t>>> chars;
+//};
 
 
 class game_logic final {
 public:
+    game_logic(size_t width, size_t height, std::vector<std::pair<size_t, size_t>> char_positions,
+               std::map<std::pair<size_t, size_t>, size_t> connection_rules);
+    size_t width, height;
+    std::vector<std::vector<tile>> tiles;
+    std::vector<character> chars;
+    std::map<character*, size_t> rules;
     std::map<character*, size_t> connected_chars_sets;// first is pointer to character, second is the number of connected set it is a part of
-    void labyrinth_step(size_t x_pos, size_t y_pos, size_t where_from);
+    void labyrinth_step(size_t x_pos, size_t y_pos, Side where_from, size_t current_set);
     std::vector<bool> isvisited; // don't forget to put isvisited = std::vector<bool>(false, width * height)
     game_logic();
     void place_character();
-    board this_board;
+   // board this_board;
 	void check_connections();
 };
 
