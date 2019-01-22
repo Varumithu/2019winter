@@ -22,9 +22,11 @@ std::vector<std::set<std::string>>
 
 
 class character{
+public:
 	virtual ~character();
 	virtual void draw();
     size_t x_pos, y_pos;
+    size_t side; // on which side of tile the character lives, 0 is up, 1 is right, 2 is down, 3 is left
 };
 
 class tile final {
