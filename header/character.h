@@ -11,7 +11,8 @@ class character{
 public:
     virtual ~character() = default;
     character();
-   // character(const character& that) :
+    character(const character& that);
+
     virtual void draw();
     size_t x_pos, y_pos;
     Side side; // on which side of tile the character lives
