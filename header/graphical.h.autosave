@@ -1,9 +1,0 @@
-#pragma once
-#include <console.h>
-
-class painter final {
-    painter();
-    ~painter();
-    
-    void draw_board();
-};
