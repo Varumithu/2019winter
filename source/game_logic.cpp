@@ -7,6 +7,7 @@
 for every character finds all characters it connects to
 */
 
+
 game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t, size_t>> char_positions,
                        std::map<std::pair<size_t, size_t>, size_t> connection_rules) : width(width), height(height)
 {

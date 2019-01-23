@@ -20,16 +20,8 @@ board positions and character names;
 std::vector<std::set<std::string>>
 */
 
-enum Side { North = 0, East = 1, South = 2, West = 3, Center = 4 };
+#include "character.h"
 
-
-class character{
-public:
-	virtual ~character();
-	virtual void draw();
-    size_t x_pos, y_pos;
-    Side side; // on which side of tile the character lives
-};
 
 class tile final {
 public:
