@@ -5,6 +5,8 @@
 #include <set>
 #include <map>
 
+const size_t amount_of_character_types = 1;
+
 /*
 Tile has a 2d array (2*2) of booleans which says which exits are connected to which
 Tile also has a pointer to character, NULL if empty
@@ -18,7 +20,7 @@ board positions and character names;
 std::vector<std::set<std::string>>
 */
 
-enum Side { North = 0, East = 1, South = 2, West = 3 };
+enum Side { North = 0, East = 1, South = 2, West = 3, Center = 4 };
 
 
 class character{
