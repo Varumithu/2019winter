@@ -2,5 +2,6 @@
 #include <console.h>
 
 class painter final {
-
+    painter();
+    ~painter();
 };

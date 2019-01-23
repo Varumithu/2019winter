@@ -55,9 +55,12 @@ public:
     size_t width, height;
     std::vector<std::vector<tile>> tiles;
     std::vector<character> chars;
-    std::map<character*, size_t> rules;
+    std::map<const character*, size_t> rules;
     std::map<character*, size_t> connected_chars_sets;// first is pointer to character, second is the number of connected set it is a part of
     void labyrinth_step(size_t x_pos, size_t y_pos, Side where_from, size_t current_set);
+
+    void step_aux(size_t x_pos, size_t y_pos, size_t current_set, size_t i);
+
     std::vector<bool> isvisited; // don't forget to put isvisited = std::vector<bool>(false, width * height)
     game_logic();
     void place_character();

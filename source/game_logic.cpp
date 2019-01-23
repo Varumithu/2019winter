@@ -12,30 +12,29 @@ game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t
 {
     size_t char_type = 0;
     for (size_t i = 0; i < char_positions.size(); ++i) {
-
-
+        this->chars.emplace_back();
+        chars.back().x_pos = char_positions[i].first;
+        chars.back().y_pos = char_positions[i].second;
+        tiles[char_positions[i].second][char_positions[i].first].inhabitant = &chars.back();
         char_type = (++char_type) % amount_of_character_types;
+        rules.insert({&chars.back(), connection_rules[{chars.back().x_pos, chars.back().y_pos}]});
     }
 }
 
 void game_logic::step_aux(size_t x_pos, size_t y_pos,  size_t current_set, size_t i) {
     switch (i) {
-        case 0: if (y_pos > 0)
-                   if (!isvisited[(y_pos - 1) * width + x_pos])
-                       labyrinth_step(x_pos, y_pos - 1, South, current_set);
+        case 0: if (y_pos > 0 && !isvisited[(y_pos - 1) * width + x_pos])
+                    labyrinth_step(x_pos, y_pos - 1, South, current_set);
                 break;
 
-        case 1: if (x_pos < width - 1)
-                   if (!isvisited[(y_pos) * width + x_pos + 1])
-                       labyrinth_step(x_pos + 1, y_pos, West, current_set);
+        case 1: if (x_pos < width - 1 && !isvisited[(y_pos) * width + x_pos + 1])
+                    labyrinth_step(x_pos + 1, y_pos, West, current_set);
                 break;
-        case 2: if (y_pos < height - 1)
-                   if (!isvisited[(y_pos + 1) * width + x_pos])
-                       labyrinth_step(x_pos, y_pos + 1, North, current_set);
+        case 2: if (y_pos < height - 1 && !isvisited[(y_pos + 1) * width + x_pos])
+                    labyrinth_step(x_pos, y_pos + 1, North, current_set);
                 break;
-        case 3: if (x_pos > 0)
-                   if (!isvisited[(y_pos) * width + x_pos - 1])
-                       labyrinth_step(x_pos - 1, y_pos, East, current_set);
+        case 3: if (x_pos > 0 && !isvisited[(y_pos) * width + x_pos - 1])
+                    labyrinth_step(x_pos - 1, y_pos, East, current_set);
                 break;
     }
 }
