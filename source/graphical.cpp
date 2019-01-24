@@ -4,7 +4,8 @@
 
 painter::painter(){
     con_init();
-    con_initPair(wight_on_black, CON_COLOR_WHITE, CON_COLOR_BLACK);
+    con_initPair(white_on_black, CON_COLOR_WHITE, CON_COLOR_BLACK);
+    con_initPair(black_on_white, CON_COLOR_BLACK, CON_COLOR_WHITE);
 
 }
 
