@@ -6,9 +6,7 @@
 #include <vector>
 
 #include "tile.h"
-
-const short wight_on_black = 0;
-const short black_on_wight = 1;
+#include "color_dec.h"
 
 class painter final {
     painter();
