@@ -7,7 +7,7 @@
 
 #include "character.h"
 #include "graphical.h"
-
+#include "tile.h"
 
 const size_t amount_of_character_types = 1;
 
@@ -23,17 +23,6 @@ game_logic constructor takes arguments: std::vector<std::pair<std::pair<size_t, 
 board positions and character names;
 std::vector<std::set<std::string>>
 */
-
-
-
-class tile final {
-public:
-    tile();
-    void draw();
-
-    bool pathways[16]; // from north clockwise 0 1 2 3
-    character* inhabitant = nullptr;
-};
 
 
 
@@ -53,7 +42,7 @@ public:
 
     void step_aux(size_t x_pos, size_t y_pos, size_t current_set, size_t i);
 
-
+    painter* graphical;
 
     std::vector<bool> isvisited; // don't forget to put isvisited = std::vector<bool>(false, width * height)
     game_logic();
