@@ -12,7 +12,12 @@ game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t
                        std::map<std::pair<size_t, size_t>, size_t> connection_rules) : width(width), height(height)
 {
     size_t char_type = 0;
+    isvisited = std::vector<bool>(false, width * height);
+    for (size_t i = 0; i < width * height; ++i) {
+
+    }
     for (size_t i = 0; i < char_positions.size(); ++i) {
+
         this->chars.emplace_back();
         chars.back().x_pos = char_positions[i].first;
         chars.back().y_pos = char_positions[i].second;

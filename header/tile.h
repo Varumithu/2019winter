@@ -10,6 +10,14 @@
  * north, east, south, west // west
  */
 
+static std::vector<bool> block {
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+};
+
+
 static std::vector<bool> west_to_north {
     false, false, false, true,
     false, false, false, false,
