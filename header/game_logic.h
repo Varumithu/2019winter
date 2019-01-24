@@ -5,6 +5,10 @@
 #include <set>
 #include <map>
 
+#include "character.h"
+#include "graphical.h"
+
+
 const size_t amount_of_character_types = 1;
 
 /*
@@ -20,7 +24,6 @@ board positions and character names;
 std::vector<std::set<std::string>>
 */
 
-#include "character.h"
 
 
 class tile final {
@@ -32,15 +35,12 @@ public:
     character* inhabitant = nullptr;
 };
 
-//class board final {
-//public:
-//    size_t width, height;
-//    std::vector <std::vector<tile>> tiles;
-//    std::vector<std::pair<character, std::pair<size_t, size_t>>> chars;
-//};
+
 
 
 class game_logic final {
+
+
 public:
     game_logic(size_t width, size_t height, std::vector<std::pair<size_t, size_t>> char_positions,
                std::map<std::pair<size_t, size_t>, size_t> connection_rules);
@@ -52,6 +52,8 @@ public:
     void labyrinth_step(size_t x_pos, size_t y_pos, Side where_from, size_t current_set);
 
     void step_aux(size_t x_pos, size_t y_pos, size_t current_set, size_t i);
+
+
 
     std::vector<bool> isvisited; // don't forget to put isvisited = std::vector<bool>(false, width * height)
     game_logic();
