@@ -13,8 +13,9 @@ game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t
 {
     size_t char_type = 0;
     isvisited = std::vector<bool>(false, width * height);
+    tiles.resize(width);
     for (size_t i = 0; i < width * height; ++i) {
-
+        tiles[i / width].push_back(tile(block, i % width, i / width));
     }
     for (size_t i = 0; i < char_positions.size(); ++i) {
 
