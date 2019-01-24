@@ -42,7 +42,7 @@ public:
 
     void step_aux(size_t x_pos, size_t y_pos, size_t current_set, size_t i);
 
-    painter* graphical;
+    painter graphical;
 
     std::vector<bool> isvisited; // don't forget to put isvisited = std::vector<bool>(false, width * height)
     game_logic();

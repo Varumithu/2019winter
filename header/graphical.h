@@ -9,6 +9,7 @@
 #include "color_dec.h"
 
 class painter final {
+public:
     painter();
     ~painter();
 

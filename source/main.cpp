@@ -8,6 +8,7 @@
 int main(int argc, char** argv)
 {
     game_logic(4, 4, std::vector<std::pair<size_t, size_t>>(), std::map<std::pair<size_t, size_t>, size_t>());
+
 }
 /*
  *
