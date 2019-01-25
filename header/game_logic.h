@@ -34,6 +34,13 @@ public:
     game_logic(size_t width, size_t height, std::vector<std::pair<size_t, size_t>> char_positions,
                std::map<std::pair<size_t, size_t>, size_t> connection_rules);
     size_t width, height;
+
+    int abstract_x = static_cast<int>(width), abstract_y = static_cast<int>(height);
+
+    size_t tile_width = 1, tile_height = 1;
+
+    void shift_abstract_position(int dx, int dy);
+
     std::vector<std::vector<tile>> tiles;
     std::vector<character> chars;
     std::map<const character*, size_t> rules;
