@@ -43,6 +43,7 @@ void controller::stateswitch(int flag) {
 
 void controller::control_loop() {
     int stateflag = 1;
+    con_gotoXY(game->abstract_x * static_cast<int>(game->tile_width), game->abstract_y * static_cast<int>(game->tile_height));
     while(stateflag != 0) {
         if (kprc == nullptr) {
             break;

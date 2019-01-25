@@ -6,6 +6,7 @@ painter::painter(){
     con_init();
     con_initPair(white_on_black, CON_COLOR_WHITE, CON_COLOR_BLACK);
     con_initPair(black_on_white, CON_COLOR_BLACK, CON_COLOR_WHITE);
+    con_initPair(black_on_red, CON_COLOR_BLACK, CON_COLOR_RED);
 
 }
 
@@ -17,6 +18,7 @@ void painter::draw_board(std::vector<std::vector<tile>>& tiles){
             tiles[i][j].draw();
         }
     }
+
 }
 
 
