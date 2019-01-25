@@ -10,7 +10,7 @@ public:
 
     key_processor* kprc;
     void stateswitch(int flag);
-    controller();
+    controller(game_logic* game);
     ~controller();
     void control_loop();
 };

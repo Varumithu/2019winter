@@ -8,8 +8,9 @@
 
 
 
-controller::controller(){
+controller::controller(game_logic* game): game(game){
     kprc = new field_key();
+    kprc->game = game;
 }
 
 controller::~controller() {

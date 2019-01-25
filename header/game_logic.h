@@ -35,7 +35,7 @@ public:
                std::map<std::pair<size_t, size_t>, size_t> connection_rules);
     size_t width, height;
 
-    int abstract_x = static_cast<int>(width), abstract_y = static_cast<int>(height);
+    int abstract_x = static_cast<int>(width) - 1, abstract_y = static_cast<int>(height) - 1;
 
     size_t tile_width = 1, tile_height = 1;
 

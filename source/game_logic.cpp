@@ -10,7 +10,7 @@ for every character finds all characters it connects to
 
 void game_logic::shift_abstract_position(int dx, int dy) {
     int conx, cony;
-    if (abstract_x + dx > 0 && abstract_x + dx < static_cast<int>(width) && abstract_y + dy > 0 && abstract_y + dy < static_cast<int>(height)) {
+    if (abstract_x + dx > -1 && abstract_x + dx < static_cast<int>(width) && abstract_y + dy > -1 && abstract_y + dy < static_cast<int>(height)) {
         abstract_x += dx;
         abstract_y += dy;
         con_getXY(&conx, &cony);

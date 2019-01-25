@@ -5,11 +5,11 @@
 
 
 
-int main(int argc, char** argv)
+int main()
 {
     game_logic test(4, 4, std::vector<std::pair<size_t, size_t>>(), std::map<std::pair<size_t, size_t>, size_t>());
     test.graphical.draw_board(test.tiles);
-    controller cntrl;
+    controller cntrl(&test);
     cntrl.control_loop();
 }
 /*
