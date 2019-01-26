@@ -27,14 +27,19 @@ void controller::stateswitch(int flag) {
             delete kprc;
             game->game_menu.graphical.draw(game->game_menu.available_tiles_names, game->game_menu.selected);
             kprc = new menu_key();
+            kprc->game = game;
             break;
         case switch_to_field:
             delete kprc;
             kprc = new field_key();
+            con_gotoXY(game->abstract_x * static_cast<int>(game->tile_width), game->abstract_y * static_cast<int>(game->tile_height));
+            kprc->game = game;
             break;
         case switch_to_placement:
             delete kprc;
             kprc = new placement_key();
+            con_gotoXY(game->abstract_x * static_cast<int>(game->tile_width), game->abstract_y * static_cast<int>(game->tile_height));
+            kprc->game = game;
             break;
         default:
             return;

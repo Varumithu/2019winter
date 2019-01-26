@@ -33,7 +33,15 @@ menu::menu(std::vector<std::string>& available_tiles) : available_tiles_names(av
 }
 
 void menu::shift_selection(int shift) {
-    selected = static_cast<size_t>((static_cast<long>(selected) + static_cast<long>(shift))) % this->available_tiles_names.size();
+    long signed_sel = static_cast<long>(selected);
+    signed_sel += shift;
+    while(signed_sel < 0) {
+        signed_sel += available_tiles_names.size();
+    }
+    while (static_cast<size_t>(signed_sel) >= available_tiles_names.size()) {
+        signed_sel -= available_tiles_names.size();
+    }
+    selected = static_cast<size_t>(signed_sel);
     this->draw();
 }
 

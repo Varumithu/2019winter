@@ -30,15 +30,16 @@ void game_logic::shift_abstract_position(int dx, int dy) {
 
 game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t, size_t>> char_positions,
                        std::map<std::pair<size_t, size_t>, size_t> connection_rules,
-                       std::vector<std::string>& available_tiles) : width(width),
-    height(height), game_menu(available_tiles)
+                       std::vector<std::string>& available_tiles,
+                       size_t tile_width, size_t tile_height) : width(width),
+    height(height), game_menu(available_tiles), tile_width(tile_width), tile_height(tile_height)
 {
     size_t char_type = 0;
     isvisited = std::vector<bool>(width * height, false);
     tiles.resize(width);
 
     for (size_t i = 0; i < width * height; ++i) {
-        tiles[i / width].push_back(tile(block, i % width, i / width, &graphical, "block"));
+        tiles[i / width].push_back(tile(block, i % width, i / width, &graphical, "block", tile_width, tile_height));
 
     }
     for (size_t i = 0; i < char_positions.size(); ++i) {

@@ -33,7 +33,8 @@ class game_logic final {
 
 public:
     game_logic(size_t width, size_t height, std::vector<std::pair<size_t, size_t>> char_positions,
-               std::map<std::pair<size_t, size_t>, size_t> connection_rules, std::vector<std::string>& available_tiles);
+               std::map<std::pair<size_t, size_t>, size_t> connection_rules, std::vector<std::string>& available_tiles,
+               size_t tile_width, size_t tile_height);
     size_t width, height;
 
     int abstract_x = static_cast<int>(width) - 1, abstract_y = static_cast<int>(height) - 1;

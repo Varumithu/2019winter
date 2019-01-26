@@ -15,7 +15,7 @@ int main()
     arg.push_back("cross");
 
     game_logic test(4, 4, std::vector<std::pair<size_t, size_t>>(), std::map<std::pair<size_t, size_t>, size_t>(),
-                    arg);
+                    arg, 4, 4);
 
     test.draw();
     controller cntrl(&test);

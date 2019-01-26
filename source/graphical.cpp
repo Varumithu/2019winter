@@ -32,16 +32,21 @@ painter::painter(){
 
 
 void painter::draw_tile(size_t x_pos, size_t y_pos, size_t width, size_t height) {
-    con_gotoXY(static_cast<int>(x_pos), static_cast<int>(y_pos));
+
     if ((x_pos + y_pos) % 2 == 0) {
 
         con_setColor(black_on_red);
-        con_outTxt(" ");
     }
     else {
-
         con_setColor(black_on_white);
-        con_outTxt(" ");
+
+    }
+    for (size_t i = 0; i < width; ++i) {
+        for (size_t j = 0; j < height; ++j) {
+            con_gotoXY(static_cast<int>(x_pos * width + i), static_cast<int>(y_pos * height + j));
+            con_outTxt(" ");
+        }
+
     }
 }
 
