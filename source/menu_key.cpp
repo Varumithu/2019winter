@@ -2,5 +2,16 @@
 
 
 int menu_key::process_key(int key) {
-    return 0;
+    switch (key) {
+    case CON_KEY_UP:
+        game->game_menu.shift_selection(-1);
+        break;
+    case CON_KEY_DOWN:
+        game->game_menu.shift_selection(1);
+        break;
+    case CON_KEY_ESCAPE:
+        this->game->draw();
+        return switch_to_field;
+    }
+    return remain;
 }

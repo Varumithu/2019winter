@@ -25,7 +25,7 @@ void controller::stateswitch(int flag) {
             return;
         case switch_to_menu:
             delete kprc;
-
+            game->game_menu.graphical.draw(game->game_menu.available_tiles_names, game->game_menu.selected);
             kprc = new menu_key();
             break;
         case switch_to_field:

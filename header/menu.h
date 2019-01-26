@@ -9,7 +9,7 @@
 class menu final{
 public:
     menu_painter graphical;
-
+    void shift_selection(int shift);
     menu(std::vector<std::string>& available_tiles);
     size_t selected = 0;
     std::vector<std::string> available_tiles_names;
