@@ -3,6 +3,20 @@
 
 
 
+void menu_painter::draw(std::vector<std::string> options, size_t selected) {
+    con_clearScr();
+    for (size_t i = 0; i < options.size(); ++i) {
+        if (i != selected) {
+            con_setColor(black_on_white);
+            con_outTxt("%s\n", options[i].c_str());
+        }
+        else {
+            con_setColor(black_on_red);
+            con_outTxt("%s\n", options[i].c_str());
+        }
+    }
+}
+
 painter::painter(){
     con_init();
     con_initPair(white_on_black, CON_COLOR_WHITE, CON_COLOR_BLACK);

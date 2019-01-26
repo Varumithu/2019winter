@@ -1,0 +1,16 @@
+#ifndef MENU_DOTH
+#define MENU_DOTH
+
+#include <vector>
+
+#include "tile.h"
+
+class menu final{
+public:
+    menu(std::vector<tile>& available_tiles): available_tiles(available_tiles) {}
+    std::vector<tile> available_tiles;
+    void draw();
+};
+
+
+#endif
