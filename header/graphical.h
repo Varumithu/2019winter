@@ -4,14 +4,13 @@
 
 #include <console.h>
 #include <vector>
+#include <string>
 
 #include "color_dec.h"
 
 class menu_painter {
 public:
-    menu_painter();
-    ~menu_painter();
-
+    void draw(std::vector<std::string> options, size_t selected);
 
 };
 

@@ -25,6 +25,7 @@ void controller::stateswitch(int flag) {
             return;
         case switch_to_menu:
             delete kprc;
+
             kprc = new menu_key();
             break;
         case switch_to_field:

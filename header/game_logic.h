@@ -8,6 +8,7 @@
 #include "character.h"
 #include "graphical.h"
 #include "tile.h"
+#include "menu.h"
 
 const size_t amount_of_character_types = 1;
 
@@ -32,7 +33,7 @@ class game_logic final {
 
 public:
     game_logic(size_t width, size_t height, std::vector<std::pair<size_t, size_t>> char_positions,
-               std::map<std::pair<size_t, size_t>, size_t> connection_rules);
+               std::map<std::pair<size_t, size_t>, size_t> connection_rules, std::vector<std::string>& available_tiles);
     size_t width, height;
 
     int abstract_x = static_cast<int>(width) - 1, abstract_y = static_cast<int>(height) - 1;
@@ -42,6 +43,8 @@ public:
     void shift_abstract_position(int dx, int dy);
 
     void draw();
+
+    menu game_menu;
 
     std::vector<std::vector<tile>> tiles;
     std::vector<character> chars;

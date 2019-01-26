@@ -18,7 +18,8 @@ int field_key::process_key(int key) {
     case CON_KEY_RIGHT:
         game->shift_abstract_position(1, 0);
         break;
-
+    case CON_KEY_ENTER:
+        return switch_to_menu;
     default:
         return 0;
     }

@@ -5,15 +5,18 @@
 
 void menu_painter::draw(std::vector<std::string> options, size_t selected) {
     con_clearScr();
-    for (size_t i = 0; i < options.size(); ++i) {
-        if (i != selected) {
-            con_setColor(black_on_white);
-            con_outTxt("%s\n", options[i].c_str());
-        }
-        else {
-            con_setColor(black_on_red);
-            con_outTxt("%s\n", options[i].c_str());
-        }
+
+    con_setColor(black_on_white);
+    for (size_t i = 0; i < selected; ++i) {
+
+        con_outTxt("%s\n", options[i].c_str());
+    }
+    con_setColor(black_on_red);
+    con_outTxt("%s\n", options[selected].c_str());
+    con_setColor(black_on_white);
+    for (size_t i = selected + 1; i < options.size(); ++i) {
+
+        con_outTxt("%s\n", options[i].c_str());
     }
 }
 

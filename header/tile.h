@@ -70,8 +70,10 @@ static std::vector<bool> cross {
 class tile final {
 public:
 
-    tile(std::vector<bool>& pathways, size_t x_pos, size_t y_pos, painter* graphical): graphical(graphical),
-        pathways(pathways), x_pos(x_pos), y_pos(y_pos) {}
+    tile(std::vector<bool>& pathways, size_t x_pos, size_t y_pos, painter* graphical, std::string name): graphical(graphical),
+        pathways(pathways), x_pos(x_pos), y_pos(y_pos), name(name) {}
+
+    std::string name = "block";
 
     painter* graphical;
     size_t tile_width = 1, tile_height = 1;
