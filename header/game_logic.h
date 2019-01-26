@@ -41,6 +41,8 @@ public:
 
     void shift_abstract_position(int dx, int dy);
 
+    void draw();
+
     std::vector<std::vector<tile>> tiles;
     std::vector<character> chars;
     std::map<const character*, size_t> rules;

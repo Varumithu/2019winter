@@ -8,6 +8,15 @@ for every character finds all characters it connects to
 */
 
 
+void game_logic::draw() {
+    for (size_t i = 0; i < tiles.size(); ++i) {
+        for (size_t j = 0; j < tiles.begin()->size(); ++j) {
+            tiles[i][j].draw();
+        }
+    }
+
+}
+
 void game_logic::shift_abstract_position(int dx, int dy) {
     int conx, cony;
     if (abstract_x + dx > -1 && abstract_x + dx < static_cast<int>(width) && abstract_y + dy > -1 && abstract_y + dy < static_cast<int>(height)) {
@@ -25,7 +34,8 @@ game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t
     isvisited = std::vector<bool>(false, width * height);
     tiles.resize(width);
     for (size_t i = 0; i < width * height; ++i) {
-        tiles[i / width].push_back(tile(block, i % width, i / width));
+        tiles[i / width].push_back(tile(block, i % width, i / width, &graphical));
+
     }
     for (size_t i = 0; i < char_positions.size(); ++i) {
 
