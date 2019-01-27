@@ -5,7 +5,11 @@
 
 void menu_painter::draw(std::vector<std::string> options, size_t selected) {
     con_clearScr();
+    if (options.size() == 0) {
+        con_outTxt("No choice");
+        return;
 
+    }
     con_setColor(black_on_white);
     for (size_t i = 0; i < selected; ++i) {
 

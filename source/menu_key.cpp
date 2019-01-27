@@ -14,7 +14,12 @@ int menu_key::process_key(int key) {
         return switch_to_field;
     case CON_KEY_ENTER:
         this->game->draw();
-        return switch_to_placement;
+        if (game->game_menu.available_tiles_names.size() > 0) {
+            return switch_to_placement;
+        }
+        else {
+            return switch_to_field;
+        }
     }
 
     return remain;
