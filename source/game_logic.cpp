@@ -8,6 +8,26 @@ for every character finds all characters it connects to
 */
 
 
+int game_logic::check_win() {
+    check_connections();
+    std::vector<std::set<const character*>> rulesets, actuals;
+    for (auto it = connected_chars_sets.begin(); it != connected_chars_sets.end(); ++it) {
+        if (actuals.size() < it->second) {
+            actuals.resize(it->second);
+        }
+        actuals[it->second].insert(it->first);
+    }
+    for (auto it = rules.begin(); it != rules.end(); ++it) {
+        if (rulesets.size() < it->second) {
+            rulesets.resize(it->second);
+        }
+        rulesets[it->second].insert(it->first);
+    }
+    // TODO this is shit, redo. Make rules marices of bools, answering the question "is this character connected to this?" then simply
+    // check equivalency
+    return 0;
+}
+
 void game_logic::draw() {
     con_clearScr();
     for (size_t i = 0; i < tiles.size(); ++i) {

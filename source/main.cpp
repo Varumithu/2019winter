@@ -9,13 +9,14 @@
 
 int main()
 {
-    std::vector<std::string> arg;
-    arg.push_back("block");
-    arg.push_back("block");
-    arg.push_back("cross");
+    std::vector<std::string> arg(16, "cross");
 
-    game_logic test(16, 16, std::vector<std::pair<size_t, size_t>>(), std::map<std::pair<size_t, size_t>, size_t>(),
-                    arg, 1, 1);
+    std::vector<std::pair<size_t, size_t>> char_positions {{0, 0}, {15, 0}};
+    std::map<std::pair<size_t, size_t>, size_t> ruleset;
+    ruleset[{0, 0}] = 0;
+    ruleset[{15, 0}] = 0;
+    game_logic test(16, 11, char_positions, ruleset,
+                    arg, 2, 2);
 
     test.draw();
     controller cntrl(&test);

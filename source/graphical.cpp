@@ -24,6 +24,14 @@ void menu_painter::draw(std::vector<std::string> options, size_t selected) {
     }
 }
 
+void painter::print_rules(std::map<const character*, size_t> con_rules){
+    con_clearScr();
+    con_setColor(black_on_white);
+    for (auto it = con_rules.begin(); it != con_rules.end(); ++it) {
+        con_outTxt("%d, %d - %d\n", it->first->x_pos, it->first->y_pos, it->second);
+    }
+}
+
 painter::painter(){
     con_init();
     con_initPair(white_on_black, CON_COLOR_WHITE, CON_COLOR_BLACK);
@@ -41,8 +49,11 @@ void painter::print_info(size_t x_pos, size_t y_pos, std::string& name, characte
         con_outTxt("NULL");
     }
     else {
-        con_outTxt("%s, lives on %s side", inhabitant->name.c_str(), SideToString(inhabitant->side).c_str());
+        con_outTxt("%s, lives on %s side\n", inhabitant->name.c_str(), SideToString(inhabitant->side).c_str());
     }
+
+    con_outTxt("Connection rules:\n");
+
 }
 
 

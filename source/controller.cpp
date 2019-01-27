@@ -47,6 +47,12 @@ void controller::stateswitch(int flag) {
             kprc->game = game;
             game->inspect_tile();
             break;
+        case switch_to_ruleset:
+            delete kprc;
+            kprc = new inspection_key();
+            kprc->game = game;
+            //game->graphical.print_rules(game->rules);
+            break;
         default:
             return;
     }

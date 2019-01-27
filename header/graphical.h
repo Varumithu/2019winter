@@ -5,6 +5,7 @@
 #include <console.h>
 #include <vector>
 #include <string>
+#include <map>
 
 #include "character.h"
 
@@ -20,6 +21,7 @@ class painter final {
 public:
     painter();
     ~painter();
+    void print_rules(std::map<const character*, size_t> con_rules);
     void print_info(size_t x_pos, size_t y_pos, std::string& name, character* inhabitant);
     void draw_tile(size_t x_pos, size_t y_pos, size_t width, size_t height, std::string& name);
 

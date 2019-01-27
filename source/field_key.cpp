@@ -23,6 +23,9 @@ int field_key::process_key(int key) {
     case 'i':
         game->inspect_tile();
         return switch_to_inspection;
+    case 'r':
+        game->graphical.print_rules(game->rules);
+        return switch_to_ruleset;
     default:
         return 0;
     }

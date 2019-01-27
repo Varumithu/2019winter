@@ -48,4 +48,5 @@ void menu::shift_selection(int shift) {
 
 void menu::draw() {
     graphical.draw(available_tiles_names, selected);
+
 }

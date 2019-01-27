@@ -21,6 +21,7 @@ int placement_key::process_key(int key) {
         game->tiles[static_cast<size_t>(game->abstract_y)][static_cast<size_t>(game->abstract_x)].name = game->game_menu.available_tiles_names[game->game_menu.selected];
         game->game_menu.available_tiles_names.erase(game->game_menu.available_tiles_names.begin() + static_cast<long>(game->game_menu.selected));
         game->game_menu.available_tiles_pathways.erase(game->game_menu.available_tiles_pathways.begin() + static_cast<long>(game->game_menu.selected));
+        game->game_menu.selected = 0;
         game->draw();
         return switch_to_field;
     default:
