@@ -20,6 +20,9 @@ int field_key::process_key(int key) {
         break;
     case CON_KEY_ENTER:
         return switch_to_menu;
+    case 'i':
+        game->inspect_tile();
+        return switch_to_inspection;
     default:
         return 0;
     }

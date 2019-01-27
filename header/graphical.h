@@ -6,6 +6,8 @@
 #include <vector>
 #include <string>
 
+#include "character.h"
+
 #include "color_dec.h"
 
 class menu_painter {
@@ -18,8 +20,8 @@ class painter final {
 public:
     painter();
     ~painter();
-
-    void draw_tile(size_t x_pos, size_t y_pos, size_t width, size_t height);
+    void print_info(size_t x_pos, size_t y_pos, std::string& name, character* inhabitant);
+    void draw_tile(size_t x_pos, size_t y_pos, size_t width, size_t height, std::string& name);
 
    // void draw_board(std::vector<std::vector<tile>>& tiles);
 };

@@ -15,7 +15,13 @@ void game_logic::draw() {
             tiles[i][j].draw();
         }
     }
+}
 
+void game_logic::inspect_tile() {
+    graphical.print_info(tiles[static_cast<size_t>(abstract_y)][static_cast<size_t>(abstract_x)].x_pos,
+                         tiles[static_cast<size_t>(abstract_y)][static_cast<size_t>(abstract_x)].y_pos,
+                         tiles[static_cast<size_t>(abstract_y)][static_cast<size_t>(abstract_x)].name,
+                         tiles[static_cast<size_t>(abstract_y)][static_cast<size_t>(abstract_x)].inhabitant);
 }
 
 void game_logic::shift_abstract_position(int dx, int dy) {
@@ -36,7 +42,7 @@ game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t
 {
     size_t char_type = 0;
     isvisited = std::vector<bool>(width * height, false);
-    tiles.resize(width);
+    tiles.resize(height);
 
     for (size_t i = 0; i < width * height; ++i) {
         tiles[i / width].push_back(tile(block, i % width, i / width, &graphical, "block", tile_width, tile_height));
@@ -47,6 +53,7 @@ game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t
         this->chars.emplace_back();
         chars.back().x_pos = char_positions[i].first;
         chars.back().y_pos = char_positions[i].second;
+        chars.back().name = "default"; // TODO make a thing to choose char type
         tiles[char_positions[i].second][char_positions[i].first].inhabitant = &chars.back();
         char_type = (++char_type) % amount_of_character_types;
         rules.insert({&chars.back(), connection_rules[{chars.back().x_pos, chars.back().y_pos}]});

@@ -3,7 +3,7 @@
 
 #include "key_processor.h"
 
-class menu_key : public key_processor {
+class menu_key final: public key_processor {
 public:
     menu_key() = default;
     ~menu_key() = default;

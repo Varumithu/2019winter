@@ -7,6 +7,21 @@ character::character() {
 
 }
 
+std::string SideToString(Side side) {
+    switch(side) {
+    case 0:
+        return "North";
+    case 1:
+        return "East";
+    case 2:
+        return "South";
+    case 3:
+        return "West";
+    case 4:
+        return "Center";
+    }
+}
+
 void character::draw() {
 
 }

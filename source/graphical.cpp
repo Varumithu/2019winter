@@ -28,13 +28,43 @@ painter::painter(){
 
 }
 
+void painter::print_info(size_t x_pos, size_t y_pos, std::string& name, character* inhabitant) {
+    con_clearScr();
+    con_setColor(black_on_white);
+
+    con_outTxt("Tile at x = %d, y = %d of type %s\ntile inhabitant is ", x_pos, y_pos, name.c_str());
+    if (inhabitant == nullptr) {
+        con_outTxt("NULL");
+    }
+    else {
+        con_outTxt("%s, lives on %s side", inhabitant->name.c_str(), SideToString(inhabitant->side).c_str());
+    }
+}
 
 
+void painter::draw_tile(size_t x_pos, size_t y_pos, size_t width, size_t height, std::string& name) {
+    char tiletext = '#';
 
-void painter::draw_tile(size_t x_pos, size_t y_pos, size_t width, size_t height) {
+    if (name == "cross") {
+        tiletext = '1';
+    }
+    else if (name == "west to north") {
+        tiletext = '2';
+    }
+    else if (name == "north to south") {
+        tiletext = '3';
+    }
+    else if (name == "west to east") {
+        tiletext = '4';
+    }
+    else if (name == "north to east") {
+        tiletext = '5';
+    }
+    else if (name == "west to south") {
+        tiletext = '6';
+    }
 
     if ((x_pos + y_pos) % 2 == 0) {
-
         con_setColor(black_on_red);
     }
     else {
@@ -44,7 +74,7 @@ void painter::draw_tile(size_t x_pos, size_t y_pos, size_t width, size_t height)
     for (size_t i = 0; i < width; ++i) {
         for (size_t j = 0; j < height; ++j) {
             con_gotoXY(static_cast<int>(x_pos * width + i), static_cast<int>(y_pos * height + j));
-            con_outTxt(" ");
+            con_outTxt("%c", tiletext);
         }
 
     }

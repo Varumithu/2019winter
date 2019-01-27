@@ -3,7 +3,7 @@
 
 #include "key_processor.h"
 
-class placement_key : public key_processor {
+class placement_key final : public key_processor {
 public:
     placement_key() = default;
     ~placement_key() = default;

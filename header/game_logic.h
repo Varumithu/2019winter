@@ -37,6 +37,8 @@ public:
                size_t tile_width, size_t tile_height);
     size_t width, height;
 
+    void inspect_tile();
+
     int abstract_x = static_cast<int>(width) - 1, abstract_y = static_cast<int>(height) - 1;
 
     size_t tile_width = 1, tile_height = 1;

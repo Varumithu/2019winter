@@ -2,7 +2,7 @@
 #include "field_key.h"
 #include "menu_key.h"
 #include "placement_key.h"
-
+#include "inspection_key.h"
 
 #include "console.h"
 
@@ -40,6 +40,12 @@ void controller::stateswitch(int flag) {
             kprc = new placement_key();
             con_gotoXY(game->abstract_x * static_cast<int>(game->tile_width), game->abstract_y * static_cast<int>(game->tile_height));
             kprc->game = game;
+            break;
+        case switch_to_inspection:
+            delete kprc;
+            kprc = new inspection_key();
+            kprc->game = game;
+            game->inspect_tile();
             break;
         default:
             return;
