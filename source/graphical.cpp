@@ -24,11 +24,30 @@ void menu_painter::draw(std::vector<std::string> options, size_t selected) {
     }
 }
 
-void painter::print_rules(std::map<const character*, size_t> con_rules){
+void painter::print_rules(const std::vector<bool>& con_rules, const std::vector<character>& chars){
     con_clearScr();
     con_setColor(black_on_white);
-    for (auto it = con_rules.begin(); it != con_rules.end(); ++it) {
-        con_outTxt("%d, %d - %d\n", it->first->x_pos, it->first->y_pos, it->second);
+    for (size_t i = 0; i < chars.size(); ++i) {
+        for (size_t j = 0; j < chars.size() - i; ++j) {
+            con_outTxt("%s at %d, %d with %s at %d, %d - DO ", chars[i].name.c_str(), chars[i].x_pos, chars[i].y_pos,
+                       chars[j].name.c_str(), chars[j].x_pos, chars[j].y_pos);
+            if (!con_rules[j + i * chars.size()]) {
+                con_outTxt("NOT");
+            }
+            con_outTxt("CONNECT\n");
+        }
+    }
+
+}
+
+void painter::print_res(bool res) {
+    con_clearScr();
+    con_setColor(white_on_black);
+    if (res) {
+        con_outTxt("THE WINRAR IS YOU");
+    }
+    else {
+        con_outTxt("YOU FAILED");
     }
 }
 

@@ -33,7 +33,7 @@ class game_logic final {
 
 public:
     game_logic(size_t width, size_t height, std::vector<std::pair<size_t, size_t>> char_positions,
-               std::map<std::pair<size_t, size_t>, size_t> connection_rules, std::vector<std::string>& available_tiles,
+               std::vector<bool> connection_rules, std::vector<std::string>& available_tiles,
                size_t tile_width, size_t tile_height);
     size_t width, height;
 
@@ -45,17 +45,21 @@ public:
 
     void shift_abstract_position(int dx, int dy);
 
+    void check_win();
+
+    std::vector<bool> connection_matrix, rules_matrix;
+
     void draw();
 
     menu game_menu;
 
     std::vector<std::vector<tile>> tiles;
     std::vector<character> chars;
-    std::map<const character*, size_t> rules;
-    std::map<character*, size_t> connected_chars_sets;// first is pointer to character, second is the number of connected set it is a part of
-    void labyrinth_step(size_t x_pos, size_t y_pos, Side where_from, size_t current_set);
+    //std::map<const character*, size_t> rules;
+    //std::map<character*, size_t> connected_chars_sets;// first is pointer to character, second is the number of connected set it is a part of
+    void labyrinth_step(size_t x_pos, size_t y_pos, Side where_from, std::vector<size_t>& current_set);
 
-    void step_aux(size_t x_pos, size_t y_pos, size_t current_set, size_t i);
+    void step_aux(size_t x_pos, size_t y_pos, std::vector<size_t>& current_set, size_t i);
 
     painter graphical;
 

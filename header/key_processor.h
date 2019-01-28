@@ -10,6 +10,7 @@ static const int switch_to_placement = 3;
 static const int switch_to_menu = 4;
 static const int switch_to_inspection = 5;
 static const int switch_to_ruleset = 6;
+static const int switch_to_resscreen = 7;
 
 
 class key_processor {

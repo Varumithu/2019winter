@@ -8,24 +8,14 @@ for every character finds all characters it connects to
 */
 
 
-int game_logic::check_win() {
+void game_logic::check_win() {
     check_connections();
-    std::vector<std::set<const character*>> rulesets, actuals;
-    for (auto it = connected_chars_sets.begin(); it != connected_chars_sets.end(); ++it) {
-        if (actuals.size() < it->second) {
-            actuals.resize(it->second);
-        }
-        actuals[it->second].insert(it->first);
+    bool res = true;
+    if (rules_matrix != connection_matrix) {
+        res = false;
     }
-    for (auto it = rules.begin(); it != rules.end(); ++it) {
-        if (rulesets.size() < it->second) {
-            rulesets.resize(it->second);
-        }
-        rulesets[it->second].insert(it->first);
-    }
-    // TODO this is shit, redo. Make rules marices of bools, answering the question "is this character connected to this?" then simply
-    // check equivalency
-    return 0;
+
+    graphical.print_res(res);
 }
 
 void game_logic::draw() {
@@ -55,10 +45,10 @@ void game_logic::shift_abstract_position(int dx, int dy) {
 }
 
 game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t, size_t>> char_positions,
-                       std::map<std::pair<size_t, size_t>, size_t> connection_rules,
+                       std::vector<bool> connection_rules, // a matrix, order the same as char_positions
                        std::vector<std::string>& available_tiles,
                        size_t tile_width, size_t tile_height) : width(width),
-    height(height), game_menu(available_tiles), tile_width(tile_width), tile_height(tile_height)
+    height(height), game_menu(available_tiles), tile_width(tile_width), tile_height(tile_height), rules_matrix(connection_rules)
 {
     size_t char_type = 0;
     isvisited = std::vector<bool>(width * height, false);
@@ -74,13 +64,15 @@ game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t
         chars.back().x_pos = char_positions[i].first;
         chars.back().y_pos = char_positions[i].second;
         chars.back().name = "default"; // TODO make a thing to choose char type
+        chars.back().number = i;
         tiles[char_positions[i].second][char_positions[i].first].inhabitant = &chars.back();
         char_type = (++char_type) % amount_of_character_types;
-        rules.insert({&chars.back(), connection_rules[{chars.back().x_pos, chars.back().y_pos}]});
+        //rules.insert({&chars.back(), connection_rules[{chars.back().x_pos, chars.back().y_pos}]});
+
     }
 }
 
-void game_logic::step_aux(size_t x_pos, size_t y_pos,  size_t current_set, size_t i) {
+void game_logic::step_aux(size_t x_pos, size_t y_pos,  std::vector<size_t>& current_set, size_t i) {
     switch (i) {
         case 0: if (y_pos > 0 && !isvisited[(y_pos - 1) * width + x_pos])
                     labyrinth_step(x_pos, y_pos - 1, South, current_set);
@@ -98,10 +90,10 @@ void game_logic::step_aux(size_t x_pos, size_t y_pos,  size_t current_set, size_
     }
 }
 
-void game_logic::labyrinth_step(size_t x_pos, size_t y_pos, Side where_from, size_t current_set) {
+void game_logic::labyrinth_step(size_t x_pos, size_t y_pos, Side where_from, std::vector<size_t>& current_set) {
     this->isvisited[y_pos * width + x_pos] = true;
     if (this->tiles[y_pos][x_pos].inhabitant != nullptr) {
-        this->connected_chars_sets[tiles[y_pos][x_pos].inhabitant] = current_set;
+        current_set.push_back(tiles[y_pos][x_pos].inhabitant->number);
     }
     for (size_t i = 0; i < 4; ++i) {// i == 0 - up, 1 - right, 2 - down, 3 - left
         if (where_from == Center) {
@@ -122,8 +114,14 @@ void game_logic::check_connections( ) {
 
     for (auto it = this->chars.begin(); it != chars.end(); ++it){
 
-        if (connected_chars_sets.find(&(*it)) == connected_chars_sets.end()) {
-            labyrinth_step(it->x_pos, it->y_pos, it->side, i);
+        if (!isvisited[it->x_pos + it->y_pos * width]) {
+            std::vector<size_t> curset;
+            labyrinth_step(it->x_pos, it->y_pos, it->side, curset);
+            for (size_t j = 0; j < curset.size(); ++j) {
+                for (size_t k = 0; k < curset.size() - j; ++k) {
+                    connection_matrix[j * chars.size() + k] = true;
+                }
+            }
             ++i;
         }
     }

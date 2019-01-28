@@ -13,9 +13,10 @@ public:
     virtual ~character() = default;
     character();
     character(const character& that);
+
     std::string name;
     virtual void draw();
-    size_t x_pos, y_pos;
+    size_t x_pos, y_pos, number;
     Side side; // on which side of tile the character lives
 };
 

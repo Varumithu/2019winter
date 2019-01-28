@@ -12,9 +12,8 @@ int main()
     std::vector<std::string> arg(16, "cross");
 
     std::vector<std::pair<size_t, size_t>> char_positions {{0, 0}, {15, 0}};
-    std::map<std::pair<size_t, size_t>, size_t> ruleset;
-    ruleset[{0, 0}] = 0;
-    ruleset[{15, 0}] = 0;
+    std::vector<bool> ruleset = {true, true, true, true};
+
     game_logic test(16, 11, char_positions, ruleset,
                     arg, 2, 2);
 
