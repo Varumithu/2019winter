@@ -48,7 +48,7 @@ game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t
                        std::vector<bool> connection_rules, // a matrix, order the same as char_positions
                        std::vector<std::string>& available_tiles,
                        size_t tile_width, size_t tile_height) : width(width),
-    height(height), game_menu(available_tiles), tile_width(tile_width), tile_height(tile_height), rules_matrix(connection_rules)
+    height(height), tile_width(tile_width), tile_height(tile_height), rules_matrix(connection_rules), game_menu(available_tiles)
 {
     size_t char_type = 0;
     isvisited = std::vector<bool>(width * height, false);
@@ -58,18 +58,20 @@ game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t
         tiles[i / width].push_back(tile(block, i % width, i / width, &graphical, "block", tile_width, tile_height));
 
     }
+    chars.resize(char_positions.size());
     for (size_t i = 0; i < char_positions.size(); ++i) {
 
-        this->chars.emplace_back();
-        chars.back().x_pos = char_positions[i].first;
-        chars.back().y_pos = char_positions[i].second;
-        chars.back().name = "default"; // TODO make a thing to choose char type
-        chars.back().number = i;
-        tiles[char_positions[i].second][char_positions[i].first].inhabitant = &chars.back();
+        //this->chars.push_back(character());
+        chars[i].x_pos = char_positions[i].first;
+        chars[i].y_pos = char_positions[i].second;
+        chars[i].name = std::string("default"); // TODO make a thing to choose char type
+        chars[i].number = i;
+        tiles[char_positions[i].second][char_positions[i].first].inhabitant = &chars[i];
         char_type = (++char_type) % amount_of_character_types;
         //rules.insert({&chars.back(), connection_rules[{chars.back().x_pos, chars.back().y_pos}]});
 
     }
+    this->connection_matrix.resize(rules_matrix.size());
 }
 
 void game_logic::step_aux(size_t x_pos, size_t y_pos,  std::vector<size_t>& current_set, size_t i) {
@@ -118,8 +120,8 @@ void game_logic::check_connections( ) {
             std::vector<size_t> curset;
             labyrinth_step(it->x_pos, it->y_pos, it->side, curset);
             for (size_t j = 0; j < curset.size(); ++j) {
-                for (size_t k = 0; k < curset.size() - j; ++k) {
-                    connection_matrix[j * chars.size() + k] = true;
+                for (size_t k = 0; k < curset.size(); ++k) {
+                    connection_matrix[curset[j] * chars.size() + curset[k]] = true;
                 }
             }
             ++i;
