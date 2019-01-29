@@ -17,16 +17,7 @@ int placement_key::process_key(int key) {
         game->shift_abstract_position(1, 0);
         break;
     case CON_KEY_ENTER:
-        game->game_menu.available_tiles_pathways.push_back(game->tiles[static_cast<size_t>(game->abstract_y)][static_cast<size_t>(game->abstract_x)].pathways);
-        game->game_menu.available_tiles_names.push_back(game->tiles[static_cast<size_t>(game->abstract_y)][static_cast<size_t>(game->abstract_x)].name);
-        game->tiles[static_cast<size_t>(game->abstract_y)][static_cast<size_t>(game->abstract_x)].pathways = game->game_menu.available_tiles_pathways[game->game_menu.selected];
-        game->tiles[static_cast<size_t>(game->abstract_y)][static_cast<size_t>(game->abstract_x)].name = game->game_menu.available_tiles_names[game->game_menu.selected];
-        game->game_menu.available_tiles_names.erase(game->game_menu.available_tiles_names.begin() + static_cast<long>(game->game_menu.selected));
-        game->game_menu.available_tiles_pathways.erase(game->game_menu.available_tiles_pathways.begin() + static_cast<long>(game->game_menu.selected));
-        game->game_menu.selected = 0;
-
-
-        game->draw();
+        game->place_tile();
         return switch_to_field;
     default:
         return exit_all;

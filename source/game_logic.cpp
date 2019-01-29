@@ -7,6 +7,25 @@
 for every character finds all characters it connects to
 */
 
+void game_logic::place_tile() {
+    game_menu.available_tiles_pathways.push_back(tiles[static_cast<size_t>(abstract_y)][static_cast<size_t>(abstract_x)].pathways);
+    game_menu.available_tiles_names.push_back(tiles[static_cast<size_t>(abstract_y)][static_cast<size_t>(abstract_x)].name);
+    tiles[static_cast<size_t>(abstract_y)][static_cast<size_t>(abstract_x)].pathways = game_menu.available_tiles_pathways[game_menu.selected];
+    tiles[static_cast<size_t>(abstract_y)][static_cast<size_t>(abstract_x)].name = game_menu.available_tiles_names[game_menu.selected];
+    game_menu.available_tiles_names.erase(game_menu.available_tiles_names.begin() + static_cast<long>(game_menu.selected));
+    game_menu.available_tiles_pathways.erase(game_menu.available_tiles_pathways.begin() + static_cast<long>(game_menu.selected));
+    game_menu.selected = 0;
+    draw();
+}
+
+void game_logic::print_rules() {
+    graphical.print_rules(rules_matrix, chars);
+
+}
+
+void game_logic::draw_menu() {
+    game_menu.graphical.draw(game_menu.available_tiles_names, game_menu.selected);
+}
 
 void game_logic::check_win() {
     check_connections();
@@ -16,6 +35,8 @@ void game_logic::check_win() {
     }
 
     graphical.print_res(res);
+    connection_matrix = std::vector<bool>(chars.size() * chars.size(), false);
+    isvisited = std::vector<bool>(isvisited.size(), false);
 }
 
 void game_logic::draw() {
@@ -25,6 +46,8 @@ void game_logic::draw() {
             tiles[i][j].draw();
         }
     }
+    con_gotoXY(abstract_x * static_cast<int>(tile_width), abstract_y * static_cast<int>(tile_height));
+
 }
 
 void game_logic::inspect_tile() {
@@ -44,7 +67,7 @@ void game_logic::shift_abstract_position(int dx, int dy) {
     }
 }
 
-game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t, size_t>> char_positions,
+game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<std::pair<size_t, size_t>, Side>> char_positions,
                        std::vector<bool> connection_rules, // a matrix, order the same as char_positions
                        std::vector<std::string>& available_tiles,
                        size_t tile_width, size_t tile_height) : width(width),
@@ -62,11 +85,12 @@ game_logic::game_logic(size_t width, size_t height, std::vector<std::pair<size_t
     for (size_t i = 0; i < char_positions.size(); ++i) {
 
         //this->chars.push_back(character());
-        chars[i].x_pos = char_positions[i].first;
-        chars[i].y_pos = char_positions[i].second;
+        chars[i].x_pos = char_positions[i].first.first;
+        chars[i].y_pos = char_positions[i].first.second;
         chars[i].name = std::string("default"); // TODO make a thing to choose char type
         chars[i].number = i;
-        tiles[char_positions[i].second][char_positions[i].first].inhabitant = &chars[i];
+        chars[i].side = char_positions[i].second;
+        tiles[char_positions[i].first.second][char_positions[i].first.first].inhabitant = &chars[i];
         char_type = (++char_type) % amount_of_character_types;
         //rules.insert({&chars.back(), connection_rules[{chars.back().x_pos, chars.back().y_pos}]});
 

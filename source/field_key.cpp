@@ -19,12 +19,13 @@ int field_key::process_key(int key) {
         game->shift_abstract_position(1, 0);
         break;
     case CON_KEY_ENTER:
+        game->draw_menu();
         return switch_to_menu;
     case 'i':
         game->inspect_tile();
         return switch_to_inspection;
     case 'r':
-        game->graphical.print_rules(game->rules_matrix, game->chars);
+        game->print_rules();
         return switch_to_ruleset;
     case 'w':
         game->check_win();

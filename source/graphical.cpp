@@ -65,14 +65,11 @@ void painter::print_info(size_t x_pos, size_t y_pos, std::string& name, characte
 
     con_outTxt("Tile at x = %d, y = %d of type %s\ntile inhabitant is ", x_pos, y_pos, name.c_str());
     if (inhabitant == nullptr) {
-        con_outTxt("NULL");
+        con_outTxt(" NULL");
     }
     else {
         con_outTxt("%s, lives on %s side\n", inhabitant->name.c_str(), SideToString(inhabitant->side).c_str());
     }
-
-    con_outTxt("Connection rules:\n");
-
 }
 
 
