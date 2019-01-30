@@ -139,7 +139,8 @@ void game_logic::labyrinth_step(size_t x_pos, size_t y_pos, Side where_from, std
             flag = true;
         }
         if (flag) {
-        current_set.push_back(tiles[y_pos][x_pos].inhabitant->number);
+            current_set.push_back(tiles[y_pos][x_pos].inhabitant->number);
+            cur.inhabitant->isvisited = true;
         }
     }
     for (size_t i = 0; i < 4; ++i) {// i == 0 - up, 1 - right, 2 - down, 3 - left
@@ -161,7 +162,7 @@ void game_logic::check_connections( ) {
 
     for (auto it = this->chars.begin(); it != chars.end(); ++it){
 
-        if (!isvisited[it->x_pos + it->y_pos * width]) {
+        if (!it->isvisited) {
             std::vector<size_t> curset;
             labyrinth_step(it->x_pos, it->y_pos, it->side, curset);
             for (size_t j = 0; j < curset.size(); ++j) {
