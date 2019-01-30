@@ -119,7 +119,28 @@ void game_logic::step_aux(size_t x_pos, size_t y_pos,  std::vector<size_t>& curr
 void game_logic::labyrinth_step(size_t x_pos, size_t y_pos, Side where_from, std::vector<size_t>& current_set) {
     this->isvisited[y_pos * width + x_pos] = true;
     if (this->tiles[y_pos][x_pos].inhabitant != nullptr) {
+        bool flag = false;
+        tile& cur = tiles[y_pos][x_pos];
+        if (where_from == Center) {
+            if (cur.inhabitant->side == Center) {
+                flag = true;
+            }
+            else for (size_t i = 0; i < 4; ++i) {
+                if (tiles[y_pos][x_pos].pathways[cur.inhabitant->side * 4 + i]){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        else if (cur.pathways[where_from * 4 + cur.inhabitant->side]) {
+            flag = true;
+        }
+        else if (where_from == cur.inhabitant->side) {
+            flag = true;
+        }
+        if (flag) {
         current_set.push_back(tiles[y_pos][x_pos].inhabitant->number);
+        }
     }
     for (size_t i = 0; i < 4; ++i) {// i == 0 - up, 1 - right, 2 - down, 3 - left
         if (where_from == Center) {
