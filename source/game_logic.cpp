@@ -37,7 +37,12 @@ void game_logic::check_win() {
     graphical.print_res(res);
     connection_matrix = std::vector<bool>(chars.size() * chars.size(), false);
     isvisited = std::vector<bool>(isvisited.size(), false);
+    for (auto it = chars.begin(); it != chars.end(); ++it) {
+        it->isvisited = false;
+    }
 }
+
+// TODO implement isvisited for individual parts of tile
 
 void game_logic::draw() {
     con_clearScr();
